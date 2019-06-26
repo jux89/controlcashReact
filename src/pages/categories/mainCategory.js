@@ -5,20 +5,20 @@ import { Link } from "react-router-dom";
 
 export default class Spend extends Component {
     state = {
-        spend: {},
+        category: [],
     };
 
     async componentDidMount () {
-        const { id } = this.props.match.params;
+        //const { id } = this.props.match.params;
 
-        const response = await api.get(`/categories/${id}`);
-
-        this.setState({ category: response.data });
+        const response = await api.get(`/categories`);
+        const { docs } = response.data;
+        this.setState({ category: docs });
     }
 
     render() {
-        const { category, index } = this.state;
-        return (
+        const { category } = this.state;
+        return category.map((category, index) => (
             <div className="user-info">
                 <div key={index} className="card mb-4">
                     <h5 className="card-header">{category.name}</h5>
@@ -30,13 +30,7 @@ export default class Spend extends Component {
                             </div>
                         </div>
                         <div className="text-right">
-                        <Link
-                                to={`/`}
-                                className="btn btn-success mr-3"
-                                role="button"
-                            >
-                                V O L T A R
-              </Link>
+                      
                             <Link
                                 to={`/deleteCategories/${category._id}`}
                                 className="btn btn-danger mr-3"
@@ -55,6 +49,6 @@ export default class Spend extends Component {
                     </div>
                 </div>
             </div>
-        );
-    }
+        ))
+    };
 }

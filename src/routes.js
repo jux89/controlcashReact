@@ -27,11 +27,11 @@ const Routes = () => (
             <Route path = "/createSpend/" component={CreateSpend} />
             <Route path = "/deleteSpend/:id" component={DeleteSpend} />
             <Route path = "/editSpend/:id" component={EditSpend} />
-            <Route path = "/categories/:id" component={Category} />
+            <Route path = "/categories" component={Category} />
             <Route path = "/createCategory/" component={CreateCategory} />
             <Route path = "/deleteCategory/:id" component={DeleteCategory} />
             <Route path = "/editCategory/:id" component={EditCategory} />
-            <Route path = "/users/:id" component={User} />
+            <Route path = "/users" component={User} />
             <Route path = "/createUser/" component={CreateUser} />
             <Route path = "/deleteUser/:id" component={DeleteUser} />
             <Route path = "/editUser/:id" component={EditUser} />

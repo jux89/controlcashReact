@@ -5,22 +5,22 @@ import { Link } from "react-router-dom";
 
 export default class Spend extends Component {
     state = {
-        spend: {},
+        spend: [],
     };
 
     async componentDidMount () {
-        const { id } = this.props.match.params;
+        //const { id } = this.props.match.params;
 
-        const response = await api.get(`/spends/${id}`);
-
-        this.setState({ spend: response.data });
+        const response = await api.get(`/spends`);
+        const { docs } = response.data;
+        this.setState({ spend: docs });
     }
 
     render() {
-        const { spend, index } = this.state;
-        return (
+        const { spend } = this.state;
+        return spend.map((spend, index) => (
             <div className="user-info">
-                <div key={index} className="card mb-4">
+                <div key={spend._id} className="card mb-4">
                     <h5 className="card-header">{spend.category}</h5>
                     <div className="card-body">
                         <div className="media">
@@ -32,13 +32,7 @@ export default class Spend extends Component {
                             </div>
                         </div>
                         <div className="text-right">
-                        <Link
-                                to={`/`}
-                                className="btn btn-success mr-3"
-                                role="button"
-                            >
-                                V O L T A R
-              </Link>
+                        
                             <Link
                                 to={`/deleteSpend/${spend._id}`}
                                 className="btn btn-danger mr-3"
@@ -53,10 +47,11 @@ export default class Spend extends Component {
                             >
                                 E D I T A R
               </Link>
+              
                         </div>
                     </div>
                 </div>
             </div>
-        );
-    }
+        ))
+    };
 }
